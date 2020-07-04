@@ -7,6 +7,26 @@ const ProductList = ({ onDelete, products }) => {
       dataIndex: 'name',
     },
     {
+      title: 'ID',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Time Created',
+      dataIndex: 'createTime',
+    },
+    {
+      title: 'Creator',
+      dataIndex: 'creator',
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+    },
+    {
+      title: 'Category',
+      dataIndex: 'category',
+    },
+    {
       title: 'Actions',
       render: (text, record) => {
         return (
