@@ -42,14 +42,14 @@ const Products = ({ dispatch, products }) => {
       payload: id,
     });
   }
-
+  debugger;
   function handleAddNew(newItem) {
     dispatch({
       type: `${namespace}/addNewItem`,
       payload: newItem,
     });
   }
-
+  debugger;
   return (
     <div>
       <h2>List of Products</h2>
@@ -66,7 +66,6 @@ const Products = ({ dispatch, products }) => {
           category: "AAA"
         })} > New Item </Button>
       </div>
-
 
       <ProductList onDelete={handleDelete} products={products} />
       <Button type="primary" href='/..'>Go Back</Button>
