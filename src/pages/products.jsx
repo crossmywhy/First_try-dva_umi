@@ -44,10 +44,15 @@ const Products = ({ dispatch, products }) => {
   }
   // debugger;
   function handleAddNew(newItem) {
-    dispatch({
-      type: `${namespace}/addNewItem`,
-      payload: newItem,
-    });
+    // Only add item when inputs is not empty.
+    let validInput = newItem.name && newItem.price && newItem.creator
+    if (validInput){
+      dispatch({
+        type: `${namespace}/addNewItem`,
+        payload: newItem,
+      });
+    }
+    
   }
   // debugger;
   return (
@@ -56,16 +61,26 @@ const Products = ({ dispatch, products }) => {
       <Button type="primary" href='/..'>Go Back</Button>        
       {/* <OpenModal buttonName="Add new" title="New item"/> */}
 
-      <div>
+      <br></br><br></br>
+
+      <Input.Group compact>
+        <Input id="itemName" style={{ width: '15%' }} addonBefore="Name:"/>
+        <Input id="itemPrice" style={{ width: '15%' }} addonBefore="Price:"/>
+        <Input id="itemCreator" style={{ width: '15%' }} addonBefore="Creator:"/>
         <Button onClick={() => handleAddNew({
-          name: 'newItem', 
-          id: 'newItem',
+          name: document.getElementById("itemName").value, 
+          // id: 'newItem',
           createTime: new Date().toLocaleTimeString(),
-          creator: "A",
-          price: 0,
+          creator: document.getElementById("itemCreator").value,
+          price: document.getElementById("itemPrice").value,
           category: "AAA"
-        })} > New Item </Button>
-      </div>
+        })} > Add Item </Button>
+      </Input.Group>
+
+      {/* <input id="data" type="text" name="name" />
+      <input type="submit" value="测试"  onclick="test()"/> */}
+
+      <br></br>
 
       <ProductList onDelete={handleDelete} products={products} />
       <Button type="primary" href='/..'>Go Back</Button>
