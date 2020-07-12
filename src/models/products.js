@@ -1,3 +1,7 @@
+function idGenerator(digit){
+  return Math.floor(Math.random() * Math.pow(10, digit)) + 1   // Randomly generate an integer from 1 to 10^digit
+}
+
 export default {
   namespace: 'products',
   state: {
@@ -27,7 +31,7 @@ export default {
     },
 
     addNewItem(state, { payload: newItem}) {
-      const newItemWithId = { ...newItem, id: 'TODO'};
+      const newItemWithId = { ...newItem, id: idGenerator(4)};
 
       // const nextData = state.concat(newItemWithId);
       // return {
