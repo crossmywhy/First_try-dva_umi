@@ -42,14 +42,14 @@ const Products = ({ dispatch, products }) => {
       payload: id,
     });
   }
-  debugger;
+  // debugger;
   function handleAddNew(newItem) {
     dispatch({
       type: `${namespace}/addNewItem`,
       payload: newItem,
     });
   }
-  debugger;
+  // debugger;
   return (
     <div>
       <h2>List of Products</h2>

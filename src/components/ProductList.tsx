@@ -37,7 +37,7 @@ const ProductList = ({ onDelete, products }) => {
       },
     },
   ];
-  return <Table dataSource={products} columns={columns} />;
+  return <Table dataSource={products.products} columns={columns} />;
 };
 
 export default ProductList;
