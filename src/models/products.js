@@ -1,5 +1,6 @@
 function idGenerator(digit){
-  return Math.floor(Math.random() * Math.pow(10, digit)) + 1   // Randomly generate an integer from 1 to 10^digit
+  // Randomly generate an integer from 1 to 10^digit.
+  return (Math.floor(Math.random() * Math.pow(10, digit)) + 1);
 }
 
 export default {
@@ -27,7 +28,6 @@ export default {
 
   reducers: {
     delete(state, { payload: id }) {
-      // return state.filter(item => item.id !== id);
       let result = state.products.filter(item => item.id !== id);
       return Object.assign({}, {products: result});
     },
@@ -35,19 +35,14 @@ export default {
     addNewItem(state, { payload: newItem}) {
       const newId = idGenerator(4);
       const newItemWithId = { ...newItem, id: idGenerator(4), key: newId.toString()};
-
-      // const nextData = state.concat(newItemWithId);
-      // return {
-      //   data: nextData,
-      // };
-
       const nextData = state.products.concat(newItemWithId);
       return Object.assign({}, {...state}, { products: nextData });
     },
 
     editItem(state, {payload: editedItem}){
-      // let result = state.products.filter(editedItem => editedItem.id !== id);
+      // !!!!!!!!!!!
       state.products = editedItem;
+      // !!!!!!!!!!!
       return Object.assign({}, {products: editedItem});
     },
   },

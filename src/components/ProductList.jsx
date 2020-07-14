@@ -1,16 +1,14 @@
 import { Table, Popconfirm, Button, Input, Form } from 'antd';
 
-import React, { useState, useReducer } from "react";
-
-// const originData = [];
+import React, { useState } from "react";
 
 const EditableCell = ({
   editing,
   dataIndex,
   title,
   inputType,
-  record,
-  index,
+  // record,
+  // index,
   children,
   ...restProps
 }) => {
@@ -43,8 +41,6 @@ const ProductList = ({ onEdit, onDelete, products }) => {
   const [form] = Form.useForm();
   const [data, setState] = useState(products.products);
 
-  // const [data, dispatch] = useState(products.products);
-
   const [editingKey, setEditingKey] = useState("");
   const isEditing = record => {
     return record.key === editingKey;
@@ -71,23 +67,13 @@ const ProductList = ({ onEdit, onDelete, products }) => {
       // const datas = data.payload;
       const newData = [...data];
       const index = newData.findIndex(item => key === item.key);
+      const item = newData[index];
+      newData.splice(index, 1, { ...item, ...row });
 
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, { ...item, ...row });
-        // dispatch.setData(newData);
-        // dispatch({
-        //   type: `products/setData`,
-        //   payload: newData,
-        // });
-        setEditingKey("");
+      setEditingKey("");
 
-        onEdit(newData);        
-      } else {
-        // newData.push(row);
-        // setData(newData);
-        // setEditingKey("");
-      }
+      onEdit(newData);
+
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
     }
@@ -137,9 +123,7 @@ const ProductList = ({ onEdit, onDelete, products }) => {
           <span>
             <a
               onClick={() => save(record.key)}
-              style={{
-                marginRight: 8
-              }}
+              style={{ marginRight: 8 }}
             >
               Save
             </a>
