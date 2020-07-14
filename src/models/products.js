@@ -6,14 +6,16 @@ export default {
   namespace: 'products',
   state: {
     products: [
-      { name: 'dva', 
+      { key: "1",
+        name: 'dva', 
         id: 1,
         createTime: new Date().toLocaleTimeString(),
         creator: "A",
         price: 0,
         category: "AAA" 
       },
-      { name: 'antd', 
+      { key: "2",
+        name: 'antd', 
         id: 2, 
         createTime: new Date().toLocaleTimeString(),
         creator: "B",
@@ -31,7 +33,8 @@ export default {
     },
 
     addNewItem(state, { payload: newItem}) {
-      const newItemWithId = { ...newItem, id: idGenerator(4)};
+      const newId = idGenerator(4);
+      const newItemWithId = { ...newItem, id: idGenerator(4), key: newId.toString()};
 
       // const nextData = state.concat(newItemWithId);
       // return {
@@ -40,6 +43,12 @@ export default {
 
       const nextData = state.products.concat(newItemWithId);
       return Object.assign({}, {...state}, { products: nextData });
-    }
+    },
+
+    editItem(state, {payload: editedItem}){
+      // let result = state.products.filter(editedItem => editedItem.id !== id);
+      state.products = editedItem;
+      return Object.assign({}, {products: editedItem});
+    },
   },
 };

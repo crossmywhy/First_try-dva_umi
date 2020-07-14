@@ -52,7 +52,13 @@ const Products = ({ dispatch, products }) => {
         payload: newItem,
       });
     }
-    
+  }
+
+  function handleEdit(editedItem) {
+    dispatch({
+      type: `${namespace}/editItem`,
+      payload: editedItem,
+    });
   }
   // debugger;
   return (
@@ -82,7 +88,7 @@ const Products = ({ dispatch, products }) => {
 
       <br></br>
 
-      <ProductList onDelete={handleDelete} products={products} />
+      <ProductList onEdit={handleEdit} onDelete={handleDelete} products={products} />
       <Button type="primary" href='/..'>Go Back</Button>
     </div>
   );
