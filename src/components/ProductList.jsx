@@ -39,7 +39,9 @@ const EditableCell = ({
 
 const ProductList = ({ onEdit, onDelete, products }) => {
   const [form] = Form.useForm();
-  const [data, setState] = useState(products.products);
+  let [data, setState] = useState(products.products);
+
+  data = products.products;   
 
   const [editingKey, setEditingKey] = useState("");
   const isEditing = record => {
@@ -52,7 +54,7 @@ const ProductList = ({ onEdit, onDelete, products }) => {
       // address: "",
       // price: "",
       // palce: "",
-      ...record
+      ...record // Here "record" is the item that is editing.
     });
     setEditingKey(record.key);
   };
@@ -64,7 +66,6 @@ const ProductList = ({ onEdit, onDelete, products }) => {
   const save = async key => {
     try {
       const row = await form.validateFields();
-      // const datas = data.payload;
       const newData = [...data];
       const index = newData.findIndex(item => key === item.key);
       const item = newData[index];
@@ -73,6 +74,7 @@ const ProductList = ({ onEdit, onDelete, products }) => {
       setEditingKey("");
 
       onEdit(newData);
+      setState(newData);
 
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);

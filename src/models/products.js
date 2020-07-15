@@ -29,21 +29,23 @@ export default {
   reducers: {
     delete(state, { payload: id }) {
       let result = state.products.filter(item => item.id !== id);
-      return Object.assign({}, {products: result});
+      return Object.assign({}, state, {products: result});
     },
 
     addNewItem(state, { payload: newItem}) {
       const newId = idGenerator(4);
-      const newItemWithId = { ...newItem, id: idGenerator(4), key: newId.toString()};
+      const newItemWithId = { ...newItem, id: newId, key: newId.toString()};
       const nextData = state.products.concat(newItemWithId);
-      return Object.assign({}, {...state}, { products: nextData });
+
+      return Object.assign({}, state, { products: nextData });
+
+      // const newResult = Object.assign({}, {...state}, { products: nextData });
+      // state.products = newResult;
+      // return newResult;
     },
 
     editItem(state, {payload: editedItem}){
-      // !!!!!!!!!!!
-      state.products = editedItem;
-      // !!!!!!!!!!!
-      return Object.assign({}, {products: editedItem});
+      return Object.assign({}, state, {products: editedItem});
     },
   },
 };
