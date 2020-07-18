@@ -3,6 +3,40 @@ function idGenerator(digit){
   return (Math.floor(Math.random() * Math.pow(10, digit)) + 1);
 }
 
+/**
+ * Return: Boolean. Decide whether the item matches the search.
+ * @param {*} item 
+ * @param {*} composedObj 
+ */
+function searchResult(item, composedObj){
+  let valid = false;
+  for (let key of Object.keys(composedObj)){
+    if (item[key] === composedObj[key]){
+      valid = true;
+    }
+  }
+  return valid;
+}
+
+/**
+ * 
+ * @param {*} state 
+ * @param {*} bool  Boolean
+ */
+function setVisible(state, bool){
+  let newState = state;
+  // let prod = newState.products.values();
+  // for (let item of Object.values(newState.products)){
+  //   item.visible = bool;
+  // }
+
+  for (let i = 0; i < newState.products.length; i++){
+    newState.products[i].visible = bool;
+  }
+  
+  return newState;
+}
+
 export default {
   namespace: 'products',
   state: {
@@ -13,7 +47,8 @@ export default {
         createTime: new Date().toLocaleTimeString(),
         creator: "A",
         price: 0,
-        category: "AAA" 
+        category: "AAA",
+        visible: true
       },
       { key: "2",
         name: 'antd', 
@@ -21,7 +56,8 @@ export default {
         createTime: new Date().toLocaleTimeString(),
         creator: "B",
         price: 0,
-        category: "AAA" 
+        category: "AAA",
+        visible: true
       },
     ],
   },
@@ -46,6 +82,24 @@ export default {
 
     editItem(state, {payload: editedItem}){
       return Object.assign({}, state, {products: editedItem});
+    },
+
+    searchItem(state, {payload: composedObj}){
+      // TODO: 记到再写正则表达判断！！！
+      // let regx = new RegExp(keyWord); 
+      // let result = state.products.filter(item => regx.test(item.name));
+      let result = setVisible(state, false);
+      result = result.products.map(item => {
+        item.visible = searchResult(item, composedObj);
+        return item;
+      })
+
+      return Object.assign({}, state, {products: result});
+    },
+
+    cancelSearch(state){
+      let newState = setVisible(state, true);
+      return Object.assign({}, newState);
     },
   },
 };

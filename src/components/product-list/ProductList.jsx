@@ -1,6 +1,11 @@
-import { Table, Popconfirm, Button, Input, Form } from 'antd';
-
+import { Table, Popconfirm, Button, Input, Form, Divider } from 'antd';
 import React, { useState } from "react";
+import {
+  PlusOutlined,
+  SwapLeftOutlined,
+  DeleteOutlined,
+  EditOutlined
+} from "@ant-design/icons";
 
 const EditableCell = ({
   editing,
@@ -135,11 +140,17 @@ const ProductList = ({ onEdit, onDelete, products }) => {
           </span>
         ) : (
           <span>
-            <Button disabled={editingKey !== ""} onClick={() => edit(record)}>
+            <EditOutlined
+              disabled={editingKey !== ""}
+              onClick={() => edit(record)}
+            />
+            {/* <Button disabled={editingKey !== ""} onClick={() => edit(record)}>
               Edit
-            </Button>
+            </Button> */}
+            <Divider type="vertical" />
             <Popconfirm title="Delete?" onConfirm={() => onDelete(record.id)}>
-              <Button>Delete</Button>
+              {/* <Button>Delete</Button> */}
+              <DeleteOutlined />
             </Popconfirm>
           </span>
         );
@@ -164,6 +175,12 @@ const ProductList = ({ onEdit, onDelete, products }) => {
     };
   });
 
+  // let visibleItems = Object.values(products.products).map(item => {
+  //   if (item.visible){
+  //     return item;
+  //   }
+  // });
+
   return (
     <Form form={form} component={false}>
       <Table 
@@ -173,7 +190,13 @@ const ProductList = ({ onEdit, onDelete, products }) => {
             cell: EditableCell
           }
         }}
-        dataSource={products.products} 
+        // dataSource={products.products} 
+        dataSource={products.products.filter(item => 
+          // if (item.visible){
+          //   return item;
+          // }
+          item.visible
+        )} 
         columns={mergedColumns}
         // columns={columns} 
       />
