@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Table, Select, Button, Form, Input } from 'antd';
 
 import SearchBar from '../components/search/search-bar.js';
+import AddBar from '../components/add/add-bar.js';
 
 const namespace = 'products';
 
@@ -31,10 +32,6 @@ const namespace = 'products';
 //     },
 //   };
 // };
-
-
-
-
 
 const Products = ({ dispatch, products }) => {
   function handleDelete(id) {
@@ -76,39 +73,22 @@ const Products = ({ dispatch, products }) => {
     });
   }
 
-  // function handleChange(editedItem) {
-  //   dispatch({
-  //     type: `${namespace}/editItem`,
-  //     payload: editedItem,
-  //   });
-  // }
-  // debugger;
   return (
     <div>
       <h2>List of Products</h2>
       {/* <Button type="primary" href='/..'>Go Back</Button>         */}
-
-      {/* <br></br>      <br></br> */}
-
-      {/* <Select
-        showSearch
-        value={products.state}
-        style={{ width: '30%' }}
-        onSearch={handleSearch}
-        onChange={handleChange}
-      >
-        
-      </Select> */}
       <SearchBar 
         onSearch={handleSearch}
-        // onChange={handleChange}
         offSearch={handleCancelSearch}
-        // products={products}
       /> 
 
-      <br></br>      <br></br>
+      <br></br>
 
-      <Input.Group compact>
+      <AddBar 
+        onAdd={handleAddNew}
+      />
+
+      {/* <Input.Group compact>
         <Input id="inputItemName" style={{ width: '15%' }} addonBefore="Name:"/>
         <Input id="inputItemPrice" style={{ width: '15%' }} addonBefore="Price:"/>
         <Input id="inputItemCreator" style={{ width: '15%' }} addonBefore="Creator:"/>
@@ -121,17 +101,15 @@ const Products = ({ dispatch, products }) => {
           category: "AAA",
           visible: true
         })} > Add Item </Button>
-      </Input.Group>
+      </Input.Group> */}
 
-      {/* <input id="data" type="text" name="name" />
-      <input type="submit" value="测试"  onclick="test()"/> */}
-
-      {/* <br></br> */}
+      <br></br>
 
       <ProductList 
         onEdit={handleEdit} 
         onDelete={handleDelete} 
-        products={products} />
+        products={products} 
+      />
       <Button type="primary" href='/..'>Go Back</Button>
     </div>
   );

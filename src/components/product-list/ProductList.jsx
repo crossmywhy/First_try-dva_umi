@@ -103,14 +103,14 @@ const ProductList = ({ onEdit, onDelete, products }) => {
       editable: false
     },
     {
-      title: 'Creator',
-      dataIndex: 'creator',
-      editable: false
-    },
-    {
       title: 'Price',
       dataIndex: 'price',
       editable: true,
+    },
+    {
+      title: 'Creator',
+      dataIndex: 'creator',
+      editable: false
     },
     {
       title: 'Category',
@@ -191,11 +191,7 @@ const ProductList = ({ onEdit, onDelete, products }) => {
           }
         }}
         // dataSource={products.products} 
-        dataSource={products.products.filter(item => 
-          // if (item.visible){
-          //   return item;
-          // }
-          item.visible
+        dataSource={products.products.filter(item => item.visible
         )} 
         columns={mergedColumns}
         // columns={columns} 

@@ -4,15 +4,18 @@ function idGenerator(digit){
 }
 
 /**
- * Return: Boolean. Decide whether the item matches the search.
- * @param {*} item 
- * @param {*} composedObj 
+ * Return: Boolean. Decide whether the item matches the search. Contain Regular Expression "+".
+ * @param {*} item A single item from stored products.
+ * @param {*} composedObj A composed searching keywords object.
  */
 function searchResult(item, composedObj){
   let valid = false;
   for (let key of Object.keys(composedObj)){
-    if (item[key] === composedObj[key]){
-      valid = true;
+    if (composedObj[key] !== ""){
+      let regx = new RegExp(`${composedObj[key]}+`);
+      if (regx.test(item[key])){
+        valid = true;
+      }
     }
   }
   return valid;
@@ -25,11 +28,6 @@ function searchResult(item, composedObj){
  */
 function setVisible(state, bool){
   let newState = state;
-  // let prod = newState.products.values();
-  // for (let item of Object.values(newState.products)){
-  //   item.visible = bool;
-  // }
-
   for (let i = 0; i < newState.products.length; i++){
     newState.products[i].visible = bool;
   }
