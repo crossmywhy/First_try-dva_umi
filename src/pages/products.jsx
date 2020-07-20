@@ -76,7 +76,6 @@ const Products = ({ dispatch, products }) => {
   return (
     <div>
       <h2>List of Products</h2>
-      {/* <Button type="primary" href='/..'>Go Back</Button>         */}
       <SearchBar 
         onSearch={handleSearch}
         offSearch={handleCancelSearch}
@@ -87,21 +86,6 @@ const Products = ({ dispatch, products }) => {
       <AddBar 
         onAdd={handleAddNew}
       />
-
-      {/* <Input.Group compact>
-        <Input id="inputItemName" style={{ width: '15%' }} addonBefore="Name:"/>
-        <Input id="inputItemPrice" style={{ width: '15%' }} addonBefore="Price:"/>
-        <Input id="inputItemCreator" style={{ width: '15%' }} addonBefore="Creator:"/>
-        <Button onClick={() => handleAddNew({
-          name: document.getElementById("inputItemName").value, 
-          // id: 'newItem',
-          createTime: new Date().toLocaleTimeString(),
-          creator: document.getElementById("inputItemCreator").value,
-          price: document.getElementById("inputItemPrice").value,
-          category: "AAA",
-          visible: true
-        })} > Add Item </Button>
-      </Input.Group> */}
 
       <br></br>
 

@@ -83,9 +83,6 @@ export default {
     },
 
     searchItem(state, {payload: composedObj}){
-      // TODO: 记到再写正则表达判断！！！
-      // let regx = new RegExp(keyWord); 
-      // let result = state.products.filter(item => regx.test(item.name));
       let result = setVisible(state, false);
       result = result.products.map(item => {
         item.visible = searchResult(item, composedObj);
@@ -96,6 +93,7 @@ export default {
     },
 
     cancelSearch(state){
+      // document.getElementById("itemName").value = "";
       let newState = setVisible(state, true);
       return Object.assign({}, newState);
     },
