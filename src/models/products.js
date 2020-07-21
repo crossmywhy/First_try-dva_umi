@@ -1,7 +1,5 @@
-function idGenerator(digit){
-  // Randomly generate an integer from 1 to 10^digit.
-  return (Math.floor(Math.random() * Math.pow(10, digit)) + 1);
-}
+import moment from 'moment';
+import {idGenerator, trimToDate} from '../components/util/utils.js'
 
 /**
  * Return: Boolean. Decide whether the item matches the search. Contain Regular Expression "+".
@@ -11,15 +9,26 @@ function idGenerator(digit){
 function searchResult(item, composedObj){
   let valid = false;
   for (let key of Object.keys(composedObj)){
-    if (composedObj[key] !== ""){
-      let regx = new RegExp(`${composedObj[key]}+`);
-      if (regx.test(item[key])){
-        valid = true;
+    if (composedObj[key] !== "" && composedObj[key] !== undefined){
+      if (key === "date") {
+        let itemTime = moment(item.createTime);
+        let time1 = composedObj[key][0];
+        let time2 = composedObj[key][1];
+        if (itemTime.isBetween(time1, time2)) {
+          valid = true;
+        }
+
+      } else {
+        let regx = new RegExp(`${composedObj[key]}+`);
+        if (regx.test(item[key])){
+          valid = true;
+        }
       }
     }
   }
   return valid;
 }
+
 
 /**
  * 
@@ -42,20 +51,22 @@ export default {
       { key: "1",
         name: 'dva', 
         id: 1,
-        createTime: new Date().toLocaleTimeString(),
+        createTime: trimToDate(new Date('August 19, 2020 23:15:30 UTC').toJSON()),
         creator: "A",
         price: 0,
         category: "AAA",
-        visible: true
+        visible: true,
+        place: "B"
       },
       { key: "2",
         name: 'antd', 
         id: 2, 
-        createTime: new Date().toLocaleTimeString(),
+        createTime: trimToDate(new Date('July 19, 2019 23:15:30 UTC').toJSON()),
         creator: "B",
         price: 0,
         category: "AAA",
-        visible: true
+        visible: true,
+        place: "C"
       },
     ],
   },

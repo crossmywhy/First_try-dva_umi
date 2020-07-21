@@ -1,50 +1,37 @@
 import React from 'react';
-import { Input, Button, Divider, Form, Space } from "antd";
+import { Input, Button, Divider, Form, Space, DatePicker } from "antd";
 import "./search-bar.less";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
 
-/**
- * Compose three input values into an Object
- * @param {*} doc 
- */
-function composeInput(doc) {
-  let result  = new Object();
-  result.name = doc.getElementById()("itemName").value;
-  result.price = doc.getElementById("itemPrice").value;
-  result.creator = doc.getElementById("itemCreator").value;
-  return result;
-}
-
-// function resetInput(){
-//   let temp = document.getElementById("itemName");
-//   temp.value = "";
-//   temp = document.getElementById("itemPrice");
-//   temp.value = "";
-//   temp = document.getElementById("itemCreator");
-//   temp.value = "";
+// /**
+//  * Compose three input values into an Object
+//  * @param {*} doc 
+//  */
+// function composeInput(doc) {
+//   let result  = new Object();
+//   result.name = doc.getElementById()("itemName").value;
+//   result.price = doc.getElementById("itemPrice").value;
+//   result.creator = doc.getElementById("itemCreator").value;
+//   return result;
 // }
 
+const { RangePicker } = DatePicker;
 
-const layout = {
-  // labelCol: {
-  //   span: 8,
-  // },
-  // wrapperCol: {
-  //   span: 16,
-  // },
-  // labelRow: {
-  //   span: 8,
-  // },
-  // // wrapperRow: {
-  // //   span: 2,
-  // // },
-};
-const tailLayout = {
-  // wrapperCol: {
-  //   offset: 8,
-  //   span: 16,
-  // },
-};
+
+// const layout = {
+//   labelCol: {
+//     span: 8,
+//   },
+//   wrapperCol: {
+//     span: 16,
+//   },
+// };
+// const tailLayout = {
+//   wrapperCol: {
+//     offset: 8,
+//     span: 16,
+//   },
+// };
 
 const SearchBar = ({ onSearch, offSearch }) => {
   const [form] = Form.useForm();
@@ -61,24 +48,27 @@ const SearchBar = ({ onSearch, offSearch }) => {
 
   return (
     <div className="search-container">
-      <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+      <Form 
+      // {...layout} 
+        form={form} 
+        name="control-hooks" 
+        onFinish={onFinish}>
         <Space>
           {/* Using Space to keep left and right horizontal align. 
           (It doesn't work for editing css format.) */}
           <div className="search-left">
             <Form.Item
-              name="name"
-              // label="Name"
+              name="id"
               rules={[
                 {
-                  required: true,
+                  required: false,
                 },
               ]}
             >
-              <Input addonBefore="Name:"/>
+              <Input addonBefore="ID:"/>
             </Form.Item>
             <Form.Item
-              name="price"
+              name="place"
               // label="Price"
               rules={[
                 {
@@ -86,23 +76,25 @@ const SearchBar = ({ onSearch, offSearch }) => {
                 },
               ]}
             >
-              <Input addonBefore="Price:"/>
+              <Input addonBefore="Place:"/>
             </Form.Item>
             <Form.Item
-              name="creator"
-              // label="Creator"
+              name="date"
               rules={[
                 {
                   required: false,
                 },
               ]}
             >
-              <Input addonBefore="Creator:"/>
+              <RangePicker/>
+              {/* <Input addonBefore="Date Range:"/> */}
             </Form.Item>
           </div>
           {/* <Divider type="vertical" /> */}
           
-          <Form.Item {...tailLayout}>
+          <Form.Item 
+            // {...tailLayout}
+            >
             <div className="search-right">
               <Button 
                 type="primary" 

@@ -9,30 +9,6 @@ import AddBar from '../components/add/add-bar.js';
 
 const namespace = 'products';
 
-// const mapStateToProps = (state) => {
-//   const productList = state[namespace].data;
-//   return {
-//     productList,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onClickAdd: (newItem: any) => {
-//       // const action = {
-//       //   type: `${namespace}/addNewItem`,
-//       //   payload: newItem,
-//       // };
-//       // dispatch(action);
-
-//       dispatch({
-//         type: `${namespace}/addNewItem`,
-//         payload: newItem,
-//       });
-//     },
-//   };
-// };
-
 const Products = ({ dispatch, products }) => {
   function handleDelete(id) {
     dispatch({

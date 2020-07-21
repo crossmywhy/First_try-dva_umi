@@ -119,7 +119,7 @@ const ProductList = ({ onEdit, onDelete, products }) => {
     },
     {
       title: 'Place',
-      dataIndex: 'palce',
+      dataIndex: 'place',
       editable: true,
     },
     {

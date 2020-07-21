@@ -1,6 +1,8 @@
 import { Input, Button, Divider } from "antd";
 import "./add-bar.less";
 import { PlusOutlined } from "@ant-design/icons";
+import {trimToDate} from '../util/utils.js'
+import moment from 'moment';
 
 const AddBar = ({ onAdd }) => {
   return (
@@ -14,7 +16,8 @@ const AddBar = ({ onAdd }) => {
         <Button 
             onClick={() => onAdd({
                 name: document.getElementById("inputItemName").value, 
-                createTime: new Date().toLocaleTimeString(),
+                // createTime: new Date().toLocaleTimeString(),
+                createTime: trimToDate(moment(new Date()).toJSON()),
                 creator: document.getElementById("inputItemCreator").value,
                 price: document.getElementById("inputItemPrice").value,
                 category: "AAA",
