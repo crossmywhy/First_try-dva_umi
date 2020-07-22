@@ -160,26 +160,38 @@ const ProductList = ({ onEdit, onDelete, products }) => {
 
   const mergedColumns = columns.map(col => {
     if (!col.editable) {
+      // If column is not editable, just return.
       return col;
     }
 
+    if (col.dataIndex == "place") {
+      return {
+        ...col,
+        onCell: record => {
+          return (
+            {
+            record,
+            // inputType: col.dataIfndex === "age" ? "number" : "text",
+            dataIndex: col.dataIndex,
+            title: col.title,
+            editing: isEditing(record)
+          });
+        }
+      }
+    }
+
+    // If column is editable:
     return {
       ...col,
       onCell: record => ({
         record,
-        inputType: col.dataIndex === "age" ? "number" : "text",
+        // inputType: col.dataIfndex === "age" ? "number" : "text",
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record)
       })
     };
   });
-
-  // let visibleItems = Object.values(products.products).map(item => {
-  //   if (item.visible){
-  //     return item;
-  //   }
-  // });
 
   return (
     <Form form={form} component={false}>
