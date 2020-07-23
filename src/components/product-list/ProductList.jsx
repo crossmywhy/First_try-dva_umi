@@ -1,4 +1,4 @@
-import { Table, Popconfirm, Button, Input, Form, Divider } from 'antd';
+import { Table, Popconfirm, Button, Input, Form, Divider, Cascader } from 'antd';
 import React, { useState } from "react";
 import {
   PlusOutlined,
@@ -6,6 +6,7 @@ import {
   DeleteOutlined,
   EditOutlined
 } from "@ant-design/icons";
+import {placeOptions as options} from '../place-option/place-options.js';
 
 const EditableCell = ({
   editing,
@@ -17,7 +18,8 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
+  // const inputNode = (inputType === "number") ? <InputNumber /> : <Input />;
+  const inputNode = (dataIndex === "place") ? <Cascader options={options} /> : <Input />;
   return (
     <td {...restProps}>
       {editing ? (
