@@ -8,6 +8,19 @@ import {
 } from "@ant-design/icons";
 import {placeOptions as options} from '../place-option/place-options.js';
 
+/**
+ * Show the last place info. Transform the place attribute: e.g. ["zhejiang", "hangzhou", "xihu"] -> "xihu"
+ * @param {*} dataset 
+ */
+function transform(dataset) {
+  let result = JSON.parse(JSON.stringify(dataset));
+  for (let item of result){
+    item.place = item.place[item.place.length - 1];
+  }
+  return result;
+}
+
+
 const EditableCell = ({
   editing,
   dataIndex,
@@ -19,7 +32,7 @@ const EditableCell = ({
   ...restProps
 }) => {
   // const inputNode = (inputType === "number") ? <InputNumber /> : <Input />;
-  const inputNode = (dataIndex === "place") ? <Cascader options={options} /> : <Input />;
+  const inputNode = (dataIndex === "place") ? <Cascader expandTrigger="hover" options={options} /> : <Input />;
   return (
     <td {...restProps}>
       {editing ? (
@@ -166,22 +179,6 @@ const ProductList = ({ onEdit, onDelete, products }) => {
       return col;
     }
 
-    if (col.dataIndex == "place") {
-      return {
-        ...col,
-        onCell: record => {
-          return (
-            {
-            record,
-            // inputType: col.dataIfndex === "age" ? "number" : "text",
-            dataIndex: col.dataIndex,
-            title: col.title,
-            editing: isEditing(record)
-          });
-        }
-      }
-    }
-
     // If column is editable:
     return {
       ...col,
@@ -205,8 +202,8 @@ const ProductList = ({ onEdit, onDelete, products }) => {
           }
         }}
         // dataSource={products.products} 
-        dataSource={products.products.filter(item => item.visible
-        )} 
+        // dataSource={transform(products.products.filter(item => item.visible))}
+        dataSource={products.products.filter(item => item.visible)}
         columns={mergedColumns}
         // columns={columns} 
       />

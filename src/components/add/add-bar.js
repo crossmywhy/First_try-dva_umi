@@ -52,7 +52,8 @@ function placeOnChange(value) {
   for (let place of value){
     curr = curr + "/" + place;
   }
-  currPlace = curr.substring(1, curr.length);
+  // currPlace = curr.substring(1, curr.length);
+  currPlace = value;
 }
 
 // Just show the latest item.
