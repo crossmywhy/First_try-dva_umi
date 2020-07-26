@@ -1,44 +1,9 @@
-import { Input, Button, Divider, Cascader } from "antd";
+import { Input, Button, Cascader } from "antd";
 import "./add-bar.less";
 import { PlusOutlined } from "@ant-design/icons";
-import {trimToDate} from '../util/utils.js';
+import {trimToDate} from '../../util/utils.js';
 import moment from 'moment';
-import {placeOptions as options} from '../place-option/place-options.js';
-
-// const options = [
-//   {
-//     value: 'zhejiang',
-//     label: 'Zhejiang',
-//     children: [
-//       {
-//         value: 'hangzhou',
-//         label: 'Hangzhou',
-//         children: [
-//           {
-//             value: 'xihu',
-//             label: 'West Lake',
-//           },
-//         ],
-//       },
-//     ],
-//   },
-//   {
-//     value: 'jiangsu',
-//     label: 'Jiangsu',
-//     children: [
-//       {
-//         value: 'nanjing',
-//         label: 'Nanjing',
-//         children: [
-//           {
-//             value: 'zhonghuamen',
-//             label: 'Zhong Hua Men',
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ];
+import {placeOptions as options} from '../ProductList.data.js';
 
 // For storing item.place value. e.g. "zhejiang/hangzhou/xihu".
 let currPlace = ""; 
@@ -48,11 +13,6 @@ let currPlace = "";
  * @param {*} value 
  */
 function placeOnChange(value) {
-  let curr = "";
-  for (let place of value){
-    curr = curr + "/" + place;
-  }
-  // currPlace = curr.substring(1, curr.length);
   currPlace = value;
 }
 
@@ -78,6 +38,7 @@ const AddBar = ({ onAdd }) => {
           // placeholder="Please select" 
           addonBefore="Place:" 
           style={{ width: '100%' }}
+          // value={document.getElementsByClassName("ant-cascader-picker-label").value}
         />
       </div>
       <div className="add-right">
@@ -94,7 +55,6 @@ const AddBar = ({ onAdd }) => {
             })}
             icon={<PlusOutlined />}
         > Add Item </Button>
-        {/* <Divider type="vertical" /> */}
       </div>
     </div>
   );

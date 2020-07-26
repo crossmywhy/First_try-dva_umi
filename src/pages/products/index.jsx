@@ -1,11 +1,11 @@
 import { connect } from 'umi';
 // import ProductList from '@/components/ProductList';
-import ProductList from '../components/product-list/ProductList';
-import React, { Component } from 'react';
-import { Table, Select, Button, Form, Input } from 'antd';
+import ProductList from '../../components/product-list/ProductList';
+import React from 'react';
+import { Button } from 'antd';
 
-import SearchBar from '../components/search/search-bar.js';
-import AddBar from '../components/add/add-bar.js';
+import SearchBar from '../../components/product-list/search/search-bar.js';
+import AddBar from '../../components/product-list/add/add-bar.js';
 
 const namespace = 'products';
 
@@ -20,7 +20,7 @@ const Products = ({ dispatch, products }) => {
   function handleAddNew(newItem) {
     // Only add item when inputs is not empty.
     let validInput = newItem.name && newItem.price && newItem.creator
-    if (validInput){
+    if (validInput){  
       dispatch({
         type: `${namespace}/addNewItem`,
         payload: newItem,
@@ -57,13 +57,9 @@ const Products = ({ dispatch, products }) => {
         offSearch={handleCancelSearch}
       /> 
 
-      <br></br>
-
       <AddBar 
         onAdd={handleAddNew}
       />
-
-      <br></br>
 
       <ProductList 
         onEdit={handleEdit} 

@@ -1,24 +1,22 @@
-import { Table, Popconfirm, Button, Input, Form, Divider, Cascader } from 'antd';
+import { Table, Popconfirm, Input, Form, Divider, Cascader } from 'antd';
 import React, { useState } from "react";
 import {
-  PlusOutlined,
-  SwapLeftOutlined,
   DeleteOutlined,
   EditOutlined
 } from "@ant-design/icons";
-import {placeOptions as options} from '../place-option/place-options.js';
+import {placeOptions as options} from './ProductList.data.js';
 
-/**
- * Show the last place info. Transform the place attribute: e.g. ["zhejiang", "hangzhou", "xihu"] -> "xihu"
- * @param {*} dataset 
- */
-function transform(dataset) {
-  let result = JSON.parse(JSON.stringify(dataset));
-  for (let item of result){
-    item.place = item.place[item.place.length - 1];
-  }
-  return result;
-}
+// /**
+//  * Show the last place info. Transform the place attribute: e.g. ["zhejiang", "hangzhou", "xihu"] -> "xihu"
+//  * @param {*} dataset 
+//  */
+// function transform(dataset) {
+//   let result = JSON.parse(JSON.stringify(dataset));
+//   for (let item of result){
+//     item.place = item.place[item.place.length - 1];
+//   }
+//   return result;
+// }
 
 
 const EditableCell = ({
@@ -70,10 +68,6 @@ const ProductList = ({ onEdit, onDelete, products }) => {
   const edit = record => {
     form.setFieldsValue({
       // name: "",
-      // age: "",
-      // address: "",
-      // price: "",
-      // palce: "",
       ...record // Here "record" is the item that is editing.
     });
     setEditingKey(record.key);
@@ -136,6 +130,13 @@ const ProductList = ({ onEdit, onDelete, products }) => {
       title: 'Place',
       dataIndex: 'place',
       editable: true,
+      // Only show the lastest place name. e.g. ["zhejiang", "hangzhou", "xihu"] -> "xihu"
+      render: (text, record) => {
+        const shortPlace = record.place[record.place.length - 1];
+        return (
+          shortPlace
+        );
+      },
     },
     {
       title: 'Actions',
@@ -202,7 +203,6 @@ const ProductList = ({ onEdit, onDelete, products }) => {
           }
         }}
         // dataSource={products.products} 
-        // dataSource={transform(products.products.filter(item => item.visible))}
         dataSource={products.products.filter(item => item.visible)}
         columns={mergedColumns}
         // columns={columns} 

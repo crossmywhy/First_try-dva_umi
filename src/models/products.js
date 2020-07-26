@@ -56,7 +56,7 @@ export default {
         price: 0,
         category: "AAA",
         visible: true,
-        place: ["zhejiang", "hangzhou", "xihu"]
+        place: ["zhejiang", "hangzhou", "xihu"],
       },
       { key: "2",
         name: 'antd', 
@@ -66,7 +66,7 @@ export default {
         price: 0,
         category: "AAA",
         visible: true,
-        place: ["zhejiang", "hangzhou", "xihu"]
+        place: ["zhejiang", "hangzhou", "xihu"],
       },
     ],
   },
