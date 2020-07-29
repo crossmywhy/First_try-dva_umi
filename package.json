@@ -3,14 +3,13 @@
   "scripts": {
     "start": "umi dev",
     "build": "umi build",
+    "build-babel": "babel src -d build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
+  
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
       "prettier --write"
@@ -29,5 +28,19 @@
     "react-dom": "^16.12.0",
     "umi": "^3.2.7",
     "yorkie": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "babel-cli": "^6.0.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
   }
 }
