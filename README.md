@@ -2,17 +2,12 @@
 
 ## Getting Started
 
-Install dependencies,
+Demo project from:
+https://ant.design/docs/react/practical-projects-cn
 
-```bash
-$ yarn
-```
 
 Start the dev server,
 
 ```bash
-$ yarn start
+$ npm start
 ```
-
-Demo project from:
-https://ant.design/docs/react/practical-projects-cn
